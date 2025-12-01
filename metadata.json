@@ -1,0 +1,5 @@
+{
+  "name": "Quantum Simulation Presentation",
+  "description": "Interactive presentation on Quantum Simulation (Deutsch-Jozsa & QFT) using Cirq and Qsim.",
+  "requestFramePermissions": []
+}
