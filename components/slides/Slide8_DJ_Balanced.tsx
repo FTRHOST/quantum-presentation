@@ -40,7 +40,7 @@ export const Slide8_DJ_Balanced = () => {
                <div className="flex flex-col gap-8 min-w-max mt-4 relative">
                  
                  {/* Oracle Box Overlay */}
-                 <div className="absolute top-[-10px] left-[260px] w-[80px] h-[120px] border-2 border-dashed border-gray-300 rounded bg-gray-50/50 -z-0"></div>
+                 <div className="absolute left-[216px] w-[80px] h-[120px] border-2 border-dashed border-gray-300 rounded bg-gray-50/50 -z-0"></div>
                  <div className="absolute top-[-25px] left-[260px] w-[80px] text-center text-xs font-bold text-gray-500">Oracle f(x)=x</div>
 
                  {/* Top Row (Input) */}
