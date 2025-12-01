@@ -25,7 +25,7 @@ export const Slide6_DJ_Intro = () => {
             <div className="flex flex-col gap-6 min-w-max relative">
                 
                 {/* Oracle Box Overlay - Absolute Positioned to span columns */}
-                <div className="absolute top-[28px] left-[248px] w-[96px] h-[104px] border-2 border-black bg-gray-100 flex items-center justify-center z-0">
+                <div className="absolute top-[0px] left-[241px] w-[96px] h-[104px] border-2 border-black bg-gray-100 flex items-center justify-center z-0">
                     <span className="font-serif italic font-bold text-xl">U_f</span>
                 </div>
 
