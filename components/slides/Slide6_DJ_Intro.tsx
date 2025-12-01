@@ -15,11 +15,11 @@ export const Slide6_DJ_Intro = () => {
             
             {/* 
                We use a rigid structure here to ensure vertical alignment.
-               Col 1: Initialization 1 (Input H, Ancilla X)
-               Col 2: Initialization 2 (Input Wire Spacer, Ancilla H)
-               Col 3: Oracle Uf
-               Col 4: Post-processing (Input H, Ancilla Wire)
-               Col 5: Measurement
+               Step 1: Init Ancilla (Input waits, Ancilla gets X)
+               Step 2: Superposition (Both get H)
+               Step 3: Oracle
+               Step 4: Interference (Input gets H)
+               Step 5: Measure
             */}
             
             <div className="flex flex-col gap-6 min-w-max relative">
@@ -33,21 +33,21 @@ export const Slide6_DJ_Intro = () => {
                 <div className="flex items-center z-10">
                     <div className="w-24 text-right font-mono font-bold text-gray-700 mr-4">Input |0⟩</div>
                     
-                    {/* Col 1 */}
-                    <Gate label="H" />
-                    
-                    {/* Col 2: Spacer Wire to match Ancilla's H gate */}
+                    {/* Step 1: Spacer (Wait for Ancilla X) */}
                     <div className="w-16"><Wire /></div>
                     
-                    {/* Col 3: Oracle Pass-through */}
+                    {/* Step 2: H */}
+                    <Gate label="H" />
+                    
+                    {/* Step 3: Oracle Pass-through */}
                     <div className="w-24 h-10 flex items-center justify-center">
                        <div className="w-full h-0.5 bg-black"></div>
                     </div>
                     
-                    {/* Col 4 */}
+                    {/* Step 4: H */}
                     <Gate label="H" />
                     
-                    {/* Col 5 */}
+                    {/* Step 5: Measure */}
                     <Measure />
                 </div>
 
@@ -55,21 +55,21 @@ export const Slide6_DJ_Intro = () => {
                 <div className="flex items-center z-10">
                     <div className="w-24 text-right font-mono font-bold text-gray-700 mr-4">Ancilla |0⟩</div>
                     
-                    {/* Col 1: Phase Kickback Prep (Step 1: X) */}
+                    {/* Step 1: Phase Kickback Prep (X) */}
                     <XCircleGate /> 
                     
-                    {/* Col 2: Phase Kickback Prep (Step 2: H) */}
+                    {/* Step 2: Phase Kickback Prep (H) */}
                     <Gate label="H" />
                     
-                    {/* Col 3: Oracle Pass-through */}
+                    {/* Step 3: Oracle Pass-through */}
                     <div className="w-24 h-10 flex items-center justify-center">
                        <div className="w-full h-0.5 bg-black"></div>
                     </div>
 
-                    {/* Col 4: Wire */}
+                    {/* Step 4: Wire */}
                     <div className="w-16"><Wire /></div>
                     
-                    {/* Col 5: Wire */}
+                    {/* Step 5: Wire */}
                     <div className="w-16"><Wire /></div>
                 </div>
             </div>

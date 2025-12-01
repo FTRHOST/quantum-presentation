@@ -47,13 +47,13 @@ export const Slide8_DJ_Balanced = () => {
                  <div className="flex items-center z-10">
                    <span className="w-24 font-mono font-bold text-gray-600 shrink-0">Input |0⟩</span>
                    
-                   {/* Col 1 */}
+                   {/* Step 1: Spacer (Match Ancilla X) */}
+                   <div className="w-16"><Wire /></div>
+                   
+                   {/* Step 2: H */}
                    <Gate label="H" />
                    
-                   {/* Col 2: Spacer Wire to align with Ancilla's H gate */}
-                   <div className="w-16"><Wire signalDelay={500} /></div>
-                   
-                   {/* Col 3: Control Part of CNOT */}
+                   {/* Step 3: Control Part of CNOT */}
                    <div className="w-16 h-10 flex items-center justify-center relative">
                       <div className="absolute w-full h-0.5 bg-gray-800"></div>
                       <ControlDot />
@@ -64,7 +64,10 @@ export const Slide8_DJ_Balanced = () => {
                       <div className="absolute top-1/2 left-1/2 w-0.5 bg-black -translate-x-1/2 z-0" style={{ height: '72px' }}></div>
                    </div>
                    
+                   {/* Step 4: H */}
                    <Gate label="H" />
+                   
+                   {/* Step 5: Measure */}
                    <Measure />
                    
                    {/* Result display */}
@@ -77,20 +80,23 @@ export const Slide8_DJ_Balanced = () => {
                  <div className="flex items-center z-10">
                    <span className="w-24 font-mono font-bold text-gray-600 shrink-0">Ancilla |0⟩</span>
                    
-                   {/* Col 1: Phase Kickback Prep (X) */}
+                   {/* Step 1: Phase Kickback Prep (X) */}
                    <XCircleGate />
                    
-                   {/* Col 2: Phase Kickback Prep (H) */}
+                   {/* Step 2: Phase Kickback Prep (H) */}
                    <Gate label="H" />
                    
-                   {/* Col 3: Target Part of CNOT */}
+                   {/* Step 3: Target Part of CNOT */}
                    <div className="w-16 h-10 flex items-center justify-center relative">
                        <div className="absolute w-full h-0.5 bg-gray-800"></div>
                        <TargetX />
                        <Signal delay={1000} />
                    </div>
                    
+                   {/* Step 4: Wire */}
                    <div className="w-16"><Wire signalDelay={1500} /></div>
+                   
+                   {/* Step 5: Wire */}
                    <div className="w-16"><Wire signalDelay={1500} /></div>
                  </div>
               </div>

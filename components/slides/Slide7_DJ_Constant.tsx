@@ -41,19 +41,24 @@ export const Slide7_DJ_Constant = () => {
                  {/* Line 1: Input */}
                  <div className="flex items-center">
                    <span className="w-24 font-mono font-bold text-gray-600 shrink-0">Input |0⟩</span>
+                   
+                   {/* Step 1: Spacer (Match Ancilla X) */}
+                   <div className="w-16"><Wire /></div>
+                   
+                   {/* Step 2: H */}
                    <Gate label="H" />
                    
-                   {/* Spacer Wire to match Ancilla's H */}
-                   <div className="w-16"><Wire signalDelay={500} /></div>
-                   
-                   {/* Oracle Section */}
+                   {/* Step 3: Oracle (Identity) */}
                    <div className="w-40 flex items-center justify-center text-sm font-bold text-gray-500 border-2 border-dashed border-gray-300 bg-gray-50 h-12 rounded shrink-0 mx-2">
                      Oracle f(x)=0
                      {/* Pass-through signal */}
                      <Signal delay={1000} />
                    </div>
                    
+                   {/* Step 4: H */}
                    <Gate label="H" />
+                   
+                   {/* Step 5: Measure */}
                    <Measure />
                    
                    {/* Result display */}
@@ -66,17 +71,22 @@ export const Slide7_DJ_Constant = () => {
                  <div className="flex items-center">
                    <span className="w-24 font-mono font-bold text-gray-600 shrink-0">Ancilla |0⟩</span>
                    
-                   {/* Initialization: X then H to get |-> */}
+                   {/* Step 1: Initialization X */}
                    <XCircleGate />
+
+                   {/* Step 2: H */}
                    <Gate label="H" />
                    
-                   {/* Oracle Section */}
+                   {/* Step 3: Oracle (Identity) */}
                    <div className="w-40 flex items-center justify-center border-2 border-dashed border-gray-300 bg-gray-50 h-12 rounded shrink-0 mx-2">
                      {/* Identity */}
                      <Signal delay={1000} />
                    </div>
                    
+                   {/* Step 4: Wire */}
                    <div className="w-16"><Wire signalDelay={1500} /></div>
+                   
+                   {/* Step 5: Wire */}
                    <div className="w-16"><Wire signalDelay={1500} /></div>
                  </div>
               </div>

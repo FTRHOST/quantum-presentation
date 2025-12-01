@@ -25,32 +25,59 @@ export const MathFormula = ({
 }) => {
   // Helper for fraction rendering
   const renderFraction = (num: string, den: string) => (
-    <span className="inline-flex flex-col items-center align-middle mx-1 vertical-align-middle">
+    <span className="inline-flex flex-col items-center align-middle mx-1 vertical-align-middle scale-90">
       <span className="border-b border-current leading-none px-1 pb-[1px] text-center w-full">{num}</span>
       <span className="leading-none px-1 pt-[1px] text-center w-full">{den}</span>
     </span>
   );
 
-  // Manual parser for specific complex structures requested
-  if (tex.includes("\\frac{1}{\\sqrt{2}}")) {
-    const rest = tex.replace("H|0⟩ =", "").replace("\\frac{1}{\\sqrt{2}}", "").replace("\\equiv |+⟩", "");
+  // 1. Handle Matrices (e.g., Slide 11)
+  if (tex.includes("\\begin{pmatrix}")) {
+    const parts = tex.split(/\\begin{pmatrix}|\\end{pmatrix}/);
+    const pre = parts[0];
+    const matrixContent = parts[1];
+    
+    const rows = matrixContent.split('\\\\').map(row => row.split('&').map(cell => cell.trim()));
+
     return (
-        <span className={`inline-flex items-center font-serif italic ${className} ${large ? 'text-2xl' : 'text-lg'}`}>
-            <span className="mr-2">H|0⟩ =</span>
-            {renderFraction("1", "√2")}
-            <span className="ml-1"> (|0⟩ + |1⟩) ≡ |+⟩</span>
-        </span>
+      <span className={`inline-flex items-center font-serif italic ${className} ${large ? 'text-xl' : 'text-base'}`}>
+         {/* Pre-matrix content (e.g., "H = 1/sqrt(2)") */}
+         <span dangerouslySetInnerHTML={{__html: 
+            pre.replace("H =", "H =")
+               .replace("R_k =", "R<sub>k</sub> =")
+               .replace(/\\frac\{1\}\{\\sqrt\{2\}\}/, '') 
+         }}></span>
+         
+         {/* Special handling for H gate fraction if it was removed above */}
+         {pre.includes("\\frac{1}{\\sqrt{2}}") && renderFraction("1", "√2")}
+
+         {/* Matrix */}
+         <span className="inline-flex items-center align-middle mx-1">
+            <span className="text-2xl font-light transform scale-y-150 mr-0.5">(</span>
+            <span className="grid gap-x-3 gap-y-1 text-center" style={{ gridTemplateColumns: `repeat(${rows[0].length}, auto)` }}>
+              {rows.flat().map((cell, i) => (
+                 <span key={i} dangerouslySetInnerHTML={{__html: 
+                   cell.replace(/e\^\{([^}]+)\}/, 'e<sup>$1</sup>')
+                       .replace(/\\pi/g, 'π')
+                       .replace(/\\sqrt\{2\}/g, '√2')
+                 }}></span>
+              ))}
+            </span>
+            <span className="text-2xl font-light transform scale-y-150 ml-0.5">)</span>
+         </span>
+      </span>
     );
   }
 
-  if (tex.includes("\\frac{1}{\\sqrt{N}}")) {
+  // 2. Handle QFT Summation Formula (Slide 10)
+  if (tex.includes("\\sum")) {
       return (
           <span className={`inline-flex items-center font-serif italic ${className} ${large ? 'text-2xl' : 'text-lg'}`}>
               <span className="mr-2">QFT|j⟩ =</span>
               {renderFraction("1", "√N")}
               <span className="mx-1 inline-flex flex-col justify-center items-center relative h-12 align-middle">
                  <span className="text-xs absolute top-0">N-1</span>
-                 <span className="text-3xl leading-none">∑</span>
+                 <span className="text-2xl leading-none">∑</span>
                  <span className="text-xs absolute bottom-0">k=0</span>
               </span>
               <span className="mx-1">e</span>
@@ -62,15 +89,27 @@ export const MathFormula = ({
       );
   }
 
-  // Basic replacements for general cases
+  // 3. Handle specific superposition formula (Slide 3)
+  if (tex.includes("H|0⟩")) {
+    return (
+        <span className={`inline-flex items-center font-serif italic ${className} ${large ? 'text-2xl' : 'text-lg'}`}>
+            <span className="mr-2">H|0⟩ =</span>
+            {renderFraction("1", "√2")}
+            <span className="ml-1"> (|0⟩ + |1⟩) ≡ |+⟩</span>
+        </span>
+    );
+  }
+
+  // 4. Basic Replacements for simple formulas
   let display = tex
     .replace(/\|0⟩/g, '<span class="font-serif">|0⟩</span>')
     .replace(/\|1⟩/g, '<span class="font-serif">|1⟩</span>')
     .replace(/\|ψ⟩/g, '<span class="font-serif">|ψ⟩</span>')
     .replace(/\|Φ\+⟩/g, '<span class="font-serif">|Φ⁺⟩</span>')
-    .replace(/\|Φ\^+\+⟩/g, '<span class="font-serif">|Φ⁺⟩</span>') // Fix for specific user input
+    .replace(/\|Φ\^+\+⟩/g, '<span class="font-serif">|Φ⁺⟩</span>')
     .replace(/\|α\|\^2/g, '|α|<sup>2</sup>')
     .replace(/\|β\|\^2/g, '|β|<sup>2</sup>')
+    .replace(/\\frac\{1\}\{\\sqrt\{2\}\}/g, '1/√2')
     .replace(/\^2/g, '<sup>2</sup>')
     .replace(/\^n/g, '<sup>n</sup>')
     .replace(/alpha/g, 'α')
