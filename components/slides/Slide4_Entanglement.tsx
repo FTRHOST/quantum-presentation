@@ -3,7 +3,7 @@ import { Gate, Wire, ControlDot, TargetX, MathFormula } from '../CircuitComponen
 
 export const Slide4_Entanglement = () => {
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col relative">
       <h2 className="text-3xl md:text-4xl font-bold text-blue-800 mb-6 border-b pb-4">Keterikatan (Entanglement)</h2>
 
       <div className="mb-8">
@@ -66,6 +66,16 @@ export const Slide4_Entanglement = () => {
               <span className="font-bold text-gray-900 block mb-1">2. Entanglement (CNOT)</span>
               <p className="text-sm text-gray-700">Gerbang CNOT menghubungkan q0 dan q1. Jika q0=1, q1 dibalik. Karena q0 superposisi, q1 ikut "terikat".</p>
            </div>
+        </div>
+
+        {/* QR Code Section */}
+        <div className="absolute bottom-4 right-4 flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity p-2 bg-white/80 rounded border border-gray-100 shadow-sm">
+            <img 
+            src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://kuantumsaga.vercel.app" 
+            alt="Scan for Live Demo" 
+            className="w-16 h-16 mix-blend-multiply"
+            />
+            <span className="text-[9px] text-gray-500 mt-1 font-mono">Live Demo</span>
         </div>
       </div>
     </div>
