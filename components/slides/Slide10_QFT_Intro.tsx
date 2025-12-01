@@ -114,7 +114,7 @@ export const Slide10_QFT_Intro = () => {
                     <strong>Normalisasi</strong><br/>Energi tetap 100%<br/><span className="text-[9px] text-yellow-700">(N = 2ⁿ)</span>
                  </div>
 
-                 <div className="absolute -bottom-4 left-1/3 bg-green-100 text-green-800 text-xs px-2 py-1 rounded border border-green-200 shadow-sm">
+                 <div className="absolute -bottom-4 left-[225px] bg-green-100 text-green-800 text-xs px-2 py-1 rounded border border-green-200 shadow-sm">
                     <strong>Superposisi</strong><br/>Menjumlahkan semua state
                  </div>
 
